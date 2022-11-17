@@ -40,6 +40,39 @@ function signIn(e) {
 }
 
 
-document.getElementById('tier1').addEventListener('click', function (e) {
-  document.getElementById('sub1').disabled = !e.target.checked;
-});
+// savings
+const dashboard = document.getElementById('dashboard');
+const deposit = document.getElementById('deposit');
+const withdraw = document.getElementById('withdraw');
+const balance = document.getElementById('balance');
+const depositInput = document.getElementById('deposit-input');
+const withdrawInput = document.getElementById('withdraw-input');
+const depositBtn = document.getElementById('deposit-btn');
+const withdrawBtn = document.getElementById('withdraw-btn');
+
+
+
+depositBtn.addEventListener('click', () => {
+    const value = depositInput.value;
+    const depositValue = Number(deposit.innerText) + Number(value);
+    const balanceValue = Number(balance.innerText) + Number(value);
+    deposit.innerText = depositValue;
+    balance.innerText = balanceValue;
+    depositInput.value = '';
+})
+
+
+withdrawBtn.addEventListener('click', () => {
+    const value = withdrawInput.value;
+    if (Number(value) === 0) {
+        alert("You don't have any balance to withdraw");
+    } else if (Number(value) > Number(balance.innerText)) {
+        alert("You don't have that much balance to withdraw");
+    } else {
+        const balanceValue = Number(balance.innerText) - Number(value);
+        const withdrawValue = Number(withdraw.innerText) + Number(value);
+        withdraw.innerText = withdrawValue;
+        balance.innerText = balanceValue;
+        withdrawInput.value = '';
+    }
+})
